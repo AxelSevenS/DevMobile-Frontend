@@ -1,0 +1,10 @@
+<ng-template *ngIf="this.support == 'granted'; else notAllowed">
+	<p class="ok-message">
+		Supported
+	</p>
+</ng-template>
+<ng-template #notAllowed>
+	<p class="error-message">
+		Your device does not support barcode scanning !
+	</p>
+</ng-template>

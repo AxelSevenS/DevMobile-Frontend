@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { VisualReadService } from './visual-read-service/visual-read.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+	public get isScanning(): boolean {
+		return this.visualReader.isActive;
+	}
+	constructor(
+		private visualReader: VisualReadService
+	) {}
 }

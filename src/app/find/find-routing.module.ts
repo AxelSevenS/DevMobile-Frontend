@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FindPage as FindPage } from './find.page';
+import { FindPage } from './find.page';
 
 const routes: Routes = [
   {

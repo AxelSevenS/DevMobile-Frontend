@@ -2,13 +2,13 @@
     <ion-header [translucent]="true">
         <ion-toolbar>
             <ion-title>
-                Find
+                Kredit
             </ion-title>
         </ion-toolbar>
         <app-user></app-user>
     </ion-header>
     
-    <ion-content>
+    <ion-content [ngStyle]="isScanning && { '--background': '#00000000' } || null">
         <ion-router-outlet></ion-router-outlet>
     </ion-content>
 </ion-app>

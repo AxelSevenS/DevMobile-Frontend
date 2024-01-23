@@ -8,6 +8,10 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
+        path: 'scan',
+        loadChildren: () => import('../scan/scan.module').then(m => m.ScanPageModule)
+      },
+      {
         path: 'find',
         loadChildren: () => import('../find/find.module').then(m => m.FindPageModule)
       },
@@ -17,14 +21,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/find',
+        redirectTo: '/tabs/scan',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/find',
+    redirectTo: '/tabs/scan',
     pathMatch: 'full'
   }
 ];
