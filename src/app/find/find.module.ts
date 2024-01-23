@@ -2,8 +2,7 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { FindPage as FindPage } from './find.page';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import { FindPage } from './find.page';
 
 import { FindPageRoutingModule } from './find-routing.module';
 
@@ -12,7 +11,6 @@ import { FindPageRoutingModule } from './find-routing.module';
     IonicModule,
     CommonModule,
     FormsModule,
-    ExploreContainerComponentModule,
     FindPageRoutingModule
   ],
   declarations: [FindPage]

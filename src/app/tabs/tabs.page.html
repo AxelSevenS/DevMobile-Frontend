@@ -1,21 +1,21 @@
 <ion-tabs>
 
-  <ion-tab-bar slot="bottom">
+    <ion-tab-bar slot="bottom">
 
-    <ng-template [ngIf]="pages.find" *ngIf="pages.find && pages.find as page">
-      <ion-tab-button [tab]="page.path" href="/tabs/{{ page.path }}">
-        <ion-icon aria-hidden="true" name="triangle"></ion-icon>
-        <ion-label>{{ page.display }}</ion-label>
-      </ion-tab-button>
-    </ng-template>
+        <ng-template [ngIf]="pages.find" *ngIf="pages.find && pages.find as page">
+            <ion-tab-button [tab]="page.path" href="/tabs/{{ page.path }}">
+            <ion-icon aria-hidden="true" name="search-circle-outline"></ion-icon>
+            <ion-label>{{ page.display }}</ion-label>
+            </ion-tab-button>
+        </ng-template>
 
-    <ng-template [ngIf]="pages.mark" *ngIf="pages.mark && pages.mark as page">
-      <ion-tab-button [tab]="page.path" href="/tabs/{{ page.path }}">
-        <ion-icon aria-hidden="true" name="ellipse"></ion-icon>
-        <ion-label>{{ page.display }}</ion-label>
-      </ion-tab-button>
-    </ng-template>
+        <ng-template [ngIf]="pages.mark" *ngIf="pages.mark && pages.mark as page">
+            <ion-tab-button [tab]="page.path" href="/tabs/{{ page.path }}">
+            <ion-icon aria-hidden="true" name="pencil-outline"></ion-icon>
+            <ion-label>{{ page.display }}</ion-label>
+            </ion-tab-button>
+        </ng-template>
 
-  </ion-tab-bar>
+    </ion-tab-bar>
 
 </ion-tabs>
