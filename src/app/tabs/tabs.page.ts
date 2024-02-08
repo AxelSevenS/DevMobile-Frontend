@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Component({
   selector: 'app-tabs',
@@ -7,29 +8,31 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-
-  public static readonly PAGES = {
-    "scan": {
+  public static readonly PAGES = [
+    {
       path: 'scan',
-      display: 'Scan'
+      display: 'Scan',
+      icon: 'scan-outline'
     },
-    "find": {
+    {
       path: 'find',
-      display: 'Find'
+      display: 'Find',
+      icon: 'search-circle-outline'
     },
-    "mark": {
+    {
       path: 'mark',
-      display: 'Mark'
+      display: 'Mark',
+      icon: 'pencil-outline'
     }
-  };
+  ];
 
   public get pages() { return TabsPage.PAGES; }
-
-  public get scanPage() { return TabsPage.PAGES.scan; }
-  public get findPage() { return TabsPage.PAGES.find; }
-  public get markPage() { return TabsPage.PAGES.mark; }
+  public get authentication(): AuthenticationService { return this._authentication; }
 
 
-  constructor() {}
+
+  constructor(
+    private _authentication: AuthenticationService,
+  ) {}
 
 }

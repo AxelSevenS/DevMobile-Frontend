@@ -4,33 +4,33 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
     component: TabsPage,
     children: [
       {
+        path: '',
+        redirectTo: 'scan',
+        pathMatch: 'full'
+      },
+      {
         path: 'scan',
-        loadChildren: () => import('../scan/scan.module').then(m => m.ScanPageModule)
+        loadChildren: () => import('./scan/scan.module').then(m => m.ScanPageModule)
       },
       {
         path: 'find',
-        loadChildren: () => import('../find/find.module').then(m => m.FindPageModule)
+        loadChildren: () => import('./find/find.module').then(m => m.FindPageModule)
       },
       {
         path: 'mark',
-        loadChildren: () => import('../mark/mark.module').then(m => m.MarkPageModule)
+        loadChildren: () => import('./mark/mark.module').then(m => m.MarkPageModule)
       },
-      {
-        path: '',
-        redirectTo: '/tabs/scan',
-        pathMatch: 'full'
-      }
     ]
   },
-  {
-    path: '',
-    redirectTo: '/tabs/scan',
-    pathMatch: 'full'
-  }
 ];
 
 @NgModule({

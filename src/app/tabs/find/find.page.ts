@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { VisualReadService } from '../visual-read-service/visual-read.service';
+import { VisualReadService } from '../../visual-read-service/visual-read.service';
 
 @Component({
     selector: 'app-find',

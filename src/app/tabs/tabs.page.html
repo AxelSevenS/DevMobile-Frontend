@@ -2,24 +2,10 @@
 
     <ion-tab-bar slot="bottom">
 
-        <ng-template [ngIf]="pages.scan" *ngIf="pages.scan && pages.scan as page">
-            <ion-tab-button [tab]="page.path" href="/tabs/{{ page.path }}">
-            <ion-icon aria-hidden="true" name="search-circle-outline"></ion-icon>
-            <ion-label>{{ page.display }}</ion-label>
-            </ion-tab-button>
-        </ng-template>
-
-        <ng-template [ngIf]="pages.find" *ngIf="pages.find && pages.find as page">
-            <ion-tab-button [tab]="page.path" href="/tabs/{{ page.path }}">
-            <ion-icon aria-hidden="true" name="search-circle-outline"></ion-icon>
-            <ion-label>{{ page.display }}</ion-label>
-            </ion-tab-button>
-        </ng-template>
-
-        <ng-template [ngIf]="pages.mark" *ngIf="pages.mark && pages.mark as page">
-            <ion-tab-button [tab]="page.path" href="/tabs/{{ page.path }}">
-            <ion-icon aria-hidden="true" name="pencil-outline"></ion-icon>
-            <ion-label>{{ page.display }}</ion-label>
+        <ng-template *ngFor="let page of pages" [ngIf]="page">
+            <ion-tab-button [tab]="page.path" [href]="'/tabs/' + page.path">
+                <ion-icon [name]="page.icon" aria-hidden="true"></ion-icon>
+                <ion-label>{{ page.display }}</ion-label>
             </ion-tab-button>
         </ng-template>
 
