@@ -8,12 +8,14 @@ import { MediaPage } from './media-page/media.page';
 import { MediaComponent } from './media/media.component';
 import { RouterModule } from '@angular/router';
 import { NgLetModule } from 'ng-let';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     RouterModule,
+    QRCodeModule,
     ReactiveFormsModule,
     NgLetModule,
     FormsModule

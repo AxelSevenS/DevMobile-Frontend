@@ -6,6 +6,7 @@ import { MediaService } from '../media.service';
 import { Media } from '../media.model';
 import { AlertController } from '@ionic/angular';
 import { ConfigService } from 'src/app/config-service/config.service';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-media-page',
@@ -27,6 +28,9 @@ export class MediaPage {
   public get isOwner() { return this._authentication.user?.id == this.media?.authorId }
   public get isAdmin() { return this._authentication.user?.roles == "Admin" }
   public get requestId() { return this.activatedRoute.snapshot.params['id'] }
+
+  public get qrCodeDownloadLink() { return this._qrCodeDownloadLink }
+  private _qrCodeDownloadLink: SafeUrl = "";
 
   public get media() { return this._media }
   private _media?: Media | null;
@@ -60,6 +64,11 @@ export class MediaPage {
         this.editMediaForm.controls['name'].setValue(media?.name);
         this.editMediaForm.controls['description'].setValue(media?.description);
       });
+  }
+  
+  onChangeURL(url: SafeUrl) {
+    this._qrCodeDownloadLink = url;
+    console.log(this._qrCodeDownloadLink);
   }
 
   onSubmit(): void {

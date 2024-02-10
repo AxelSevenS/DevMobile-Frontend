@@ -2,10 +2,16 @@
 
   <ion-item *ngIf="media && fileUrl && mimeType">
 
-    <video controls *ngIf="mimeType.startsWith('video')"><source [src]="fileUrl" [type]="mimeType"></video>
-    <audio controls *ngIf="mimeType.startsWith('audio')" [src]="fileUrl"></audio>
-    <img *ngIf="mimeType.startsWith('image')" [src]="fileUrl"/>
-
+    <ion-col>
+      <video controls *ngIf="mimeType.startsWith('video')"><source [src]="fileUrl" [type]="mimeType"></video>
+      <audio controls *ngIf="mimeType.startsWith('audio')" [src]="fileUrl"></audio>
+      <img *ngIf="mimeType.startsWith('image')" [src]="fileUrl"/>
+    </ion-col>
+    
+    <ion-col>
+      <qrcode [qrdata]="'krdt://' + media.id" (qrCodeURL)="onChangeURL($event)" [width]="256" errorCorrectionLevel="M"></qrcode>
+    </ion-col>
+    
     <ion-col>
       <form [formGroup]="editMediaForm" (submit)="onSubmit()">
         
@@ -48,6 +54,15 @@
                 <ion-icon slot="start" name="eye-outline"></ion-icon>
                 Afficher
               </ion-button>
+            </ion-col>
+
+            <ion-col>
+              <a [href]="qrCodeDownloadLink">  
+                <ion-button expand="block">
+                  <ion-icon slot="start" name="qr-code-outline" download="qrcode"></ion-icon>
+                  QR
+                </ion-button>
+              </a>
             </ion-col>
             
             <ion-col *ngIf="isOwner || isAdmin">
