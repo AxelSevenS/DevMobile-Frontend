@@ -22,7 +22,6 @@ export class UserListPage implements OnInit {
   }
 
   onInfiniteScroll(event: Event) {
-    console.log(event);
   }
 
 }

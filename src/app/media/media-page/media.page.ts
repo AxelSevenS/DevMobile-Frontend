@@ -68,7 +68,6 @@ export class MediaPage {
   
   onChangeURL(url: SafeUrl) {
     this._qrCodeDownloadLink = url;
-    console.log(this._qrCodeDownloadLink);
   }
 
   onSubmit(): void {
@@ -79,10 +78,7 @@ export class MediaPage {
     this.media.name = this.editMediaForm.controls['name'].value;
     this.media.description = this.editMediaForm.controls['description'].value;
 
-    this.mediaService.updateMediaById(this.media.id, updated)
-      .subscribe(res => {
-        console.log(res);
-      })
+    this.mediaService.updateMediaById(this.media.id, updated);
   }
 
   async delete() {

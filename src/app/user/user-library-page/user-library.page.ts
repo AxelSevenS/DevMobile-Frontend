@@ -44,7 +44,6 @@ export class UserLibraryPage implements OnInit {
   }
 
   onInfiniteScroll(event: Event) {
-    console.log(event);
   }
 
 }

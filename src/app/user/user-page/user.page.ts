@@ -56,7 +56,6 @@ export class UserPage {
   }
 
   onSubmit(): void {
-    console.log(`${this.user} | ${this.editUserForm.valid}`);
     if ( ! this.user ) return;
     if ( ! this.editUserForm.valid ) return;
 
@@ -65,8 +64,6 @@ export class UserPage {
     this.user.username = this.editUserForm.controls['username'].value;
     this.user.password = this.editUserForm.controls['password'].value;
     this.user.roles = this.editUserForm.controls['roles'].value;
-
-    console.log(updated);
 
     this.userService.updateUserById(this.requestId, updated)
       .subscribe(res => {

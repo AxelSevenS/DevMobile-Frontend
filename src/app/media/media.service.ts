@@ -52,10 +52,6 @@ export class MediaService {
     let token = localStorage.getItem(AuthenticationService.storageKey);
     if ( ! token ) return of(null);
 
-    console.log(name);
-    console.log(description);
-    console.log(file);
-
     const formData = new FormData();
     formData.append('name', name);
     formData.append('description', description);
@@ -65,7 +61,6 @@ export class MediaService {
 
     return this.http.put<Media>(`${this.config.host}/api/media`, formData, {headers: headers})
       .pipe( catchError(e => {
-        console.log(e);
         return of(null);
       }));
   }
