@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ConfigService } from '../config-service/config.service';
+import { environment } from '../../environments/environment';
 import { Media } from './media.model';
 import { AuthenticationService } from '../authentication/authentication.service';
 import mime from 'mime';
@@ -14,7 +14,6 @@ export declare type AuthenticationState = 'loggedIn' | 'loggedOut' | 'disconnect
 export class MediaService {
 
   constructor(
-    private config: ConfigService,
     private authentication: AuthenticationService,
     private http: HttpClient
   ) { }
@@ -24,25 +23,25 @@ export class MediaService {
   }
 
   getMediaFileUrl(media: Media): string {
-    return `${this.config.host}/Resources/Media/${media.id}.${media.extension}`;
+    return `${environment.apiUrl}/Resources/Media/${media.id}.${media.extension}`;
   }
 
   getMedias(): Observable<Media[]> {
-    return this.http.get<Media[]>(`${this.config.host}/api/media`)
+    return this.http.get<Media[]>(`${environment.apiUrl}/api/media`)
       .pipe( catchError(err => {
         return [];
       }));
   }
 
   getMediaById(id: number): Observable<Media | null> {
-    return this.http.get<Media>(`${this.config.host}/api/media/${id}`)
+    return this.http.get<Media>(`${environment.apiUrl}/api/media/${id}`)
       .pipe( catchError(() => {
         return of(null);
       }));
   }
 
   getMediaByAuthorId(id: number): Observable<Media[] | null> {
-    return this.http.get<Media[]>(`${this.config.host}/api/media/byAuthor/${id}`)
+    return this.http.get<Media[]>(`${environment.apiUrl}/api/media/byAuthor/${id}`)
       .pipe( catchError(() => {
         return of(null);
       }));
@@ -59,7 +58,7 @@ export class MediaService {
 
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}`, 'enctype': 'multipart/form-data' });
 
-    return this.http.put<Media>(`${this.config.host}/api/media`, formData, {headers: headers})
+    return this.http.put<Media>(`${environment.apiUrl}/api/media`, formData, {headers: headers})
       .pipe( catchError(e => {
         return of(null);
       }));
@@ -75,7 +74,7 @@ export class MediaService {
 
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
-    return this.http.put<Media>(`${this.config.host}/api/media/${id}`, formData, {headers: headers})
+    return this.http.put<Media>(`${environment.apiUrl}/api/media/${id}`, formData, {headers: headers})
       .pipe(
         catchError(() => {
           return of(null);
@@ -89,7 +88,7 @@ export class MediaService {
 
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
-    return this.http.delete<Media>(`${this.config.host}/api/media/${id}`, {headers: headers})
+    return this.http.delete<Media>(`${environment.apiUrl}/api/media/${id}`, {headers: headers})
       .pipe(
         catchError(() => {
           return of(null);

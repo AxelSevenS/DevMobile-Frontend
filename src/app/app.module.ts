@@ -7,7 +7,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.page';
 import { ScannerService } from './scanner-service/scanner.service';
-import { ConfigService } from './config-service/config.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from './authentication/authentication.service';
 import { NotFoundPage } from './not-found/not-found.page';
@@ -25,7 +24,6 @@ import { NotFoundPage } from './not-found/not-found.page';
   providers: [
     Storage,
     HttpClient,
-    ConfigService,
     ScannerService,
     AuthenticationService,
     { 

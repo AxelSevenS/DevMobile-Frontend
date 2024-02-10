@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { ConfigService } from '../config-service/config.service';
+import { environment } from '../../environments/environment';
 import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { User } from '../user/user.model';
 import { Router } from '@angular/router';
@@ -26,7 +26,6 @@ export class AuthenticationService {
   }
 
   constructor(
-    private config: ConfigService,
     private http: HttpClient,
     private router: Router
   ) {
@@ -52,7 +51,7 @@ export class AuthenticationService {
 
     const headers = new HttpHeaders({ 'enctype': 'multipart/form-data' });
 
-    return this.http.post<string>(`${this.config.host}/api/users/auth/`, formData, {headers: headers})
+    return this.http.post<string>(`${environment.apiUrl}/api/users/auth/`, formData, {headers: headers})
       .pipe( 
         map(res => {
           this._user = this.jwtToUser(res);
@@ -79,7 +78,7 @@ export class AuthenticationService {
 
     const headers = new HttpHeaders({ 'enctype': 'multipart/form-data' });
 
-    return this.http.put<User>(`${this.config.host}/api/users/`, formData, {headers: headers})
+    return this.http.put<User>(`${environment.apiUrl}/api/users/`, formData, {headers: headers})
       .pipe(
         catchError(err => of(null) )
       );

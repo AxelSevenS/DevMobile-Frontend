@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ConfigService } from '../config-service/config.service';
+import { environment } from '../../environments/environment';
 import { User } from './user.model';
 import { Observable, catchError, of } from 'rxjs';
 import { AuthenticationService } from '../authentication/authentication.service';
@@ -13,19 +13,18 @@ export declare type AuthenticationState = 'loggedIn' | 'loggedOut' | 'disconnect
 export class UserService {
 
   constructor(
-    private config: ConfigService,
     private http: HttpClient
   ) { }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.config.host}/api/users`)
+    return this.http.get<User[]>(`${environment.apiUrl}/api/users`)
       .pipe( catchError(() => {
         return [];
       }));
   }
 
   getUserById(id: number): Observable<User | null> {
-    return this.http.get<User>(`${this.config.host}/api/users/${id}`)
+    return this.http.get<User>(`${environment.apiUrl}/api/users/${id}`)
       .pipe( catchError(() => {
         return of(null);
       }));
@@ -42,7 +41,7 @@ export class UserService {
 
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
-    return this.http.put<User>(`${this.config.host}/api/users/${id}`, formData, {headers: headers})
+    return this.http.put<User>(`${environment.apiUrl}/api/users/${id}`, formData, {headers: headers})
       .pipe(
         catchError(() => {
           return of(null);

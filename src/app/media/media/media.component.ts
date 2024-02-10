@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, numberAttribute } from '@angular/core';
 import { MediaService } from '../media.service';
 import { Media } from '../media.model';
-import { ConfigService } from 'src/app/config-service/config.service';
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import { AlertController } from '@ionic/angular';
 

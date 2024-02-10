@@ -5,7 +5,6 @@ import { AuthenticationService } from 'src/app/authentication/authentication.ser
 import { MediaService } from '../media.service';
 import { Media } from '../media.model';
 import { AlertController } from '@ionic/angular';
-import { ConfigService } from 'src/app/config-service/config.service';
 import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
