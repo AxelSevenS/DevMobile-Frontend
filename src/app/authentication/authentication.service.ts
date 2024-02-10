@@ -51,7 +51,7 @@ export class AuthenticationService {
 
     const headers = new HttpHeaders({ 'enctype': 'multipart/form-data' });
 
-    return this.http.post<string>(`${environment.apiUrl}/api/users/auth/`, formData, {headers: headers})
+    return this.http.post<string>(`${environment.host}/api/users/auth/`, formData, {headers: headers})
       .pipe( 
         map(res => {
           this._user = this.jwtToUser(res);
@@ -78,7 +78,7 @@ export class AuthenticationService {
 
     const headers = new HttpHeaders({ 'enctype': 'multipart/form-data' });
 
-    return this.http.put<User>(`${environment.apiUrl}/api/users/`, formData, {headers: headers})
+    return this.http.put<User>(`${environment.host}/api/users/`, formData, {headers: headers})
       .pipe(
         catchError(err => of(null) )
       );

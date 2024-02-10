@@ -23,25 +23,25 @@ export class MediaService {
   }
 
   getMediaFileUrl(media: Media): string {
-    return `${environment.apiUrl}/Resources/Media/${media.id}.${media.extension}`;
+    return `${environment.host}/Resources/Media/${media.id}.${media.extension}`;
   }
 
   getMedias(): Observable<Media[]> {
-    return this.http.get<Media[]>(`${environment.apiUrl}/api/media`)
+    return this.http.get<Media[]>(`${environment.host}/api/media`)
       .pipe( catchError(err => {
         return [];
       }));
   }
 
   getMediaById(id: number): Observable<Media | null> {
-    return this.http.get<Media>(`${environment.apiUrl}/api/media/${id}`)
+    return this.http.get<Media>(`${environment.host}/api/media/${id}`)
       .pipe( catchError(() => {
         return of(null);
       }));
   }
 
   getMediaByAuthorId(id: number): Observable<Media[] | null> {
-    return this.http.get<Media[]>(`${environment.apiUrl}/api/media/byAuthor/${id}`)
+    return this.http.get<Media[]>(`${environment.host}/api/media/byAuthor/${id}`)
       .pipe( catchError(() => {
         return of(null);
       }));
@@ -58,7 +58,7 @@ export class MediaService {
 
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}`, 'enctype': 'multipart/form-data' });
 
-    return this.http.put<Media>(`${environment.apiUrl}/api/media`, formData, {headers: headers})
+    return this.http.put<Media>(`${environment.host}/api/media`, formData, {headers: headers})
       .pipe( catchError(e => {
         return of(null);
       }));
@@ -74,7 +74,7 @@ export class MediaService {
 
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
-    return this.http.put<Media>(`${environment.apiUrl}/api/media/${id}`, formData, {headers: headers})
+    return this.http.put<Media>(`${environment.host}/api/media/${id}`, formData, {headers: headers})
       .pipe(
         catchError(() => {
           return of(null);
@@ -88,7 +88,7 @@ export class MediaService {
 
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
-    return this.http.delete<Media>(`${environment.apiUrl}/api/media/${id}`, {headers: headers})
+    return this.http.delete<Media>(`${environment.host}/api/media/${id}`, {headers: headers})
       .pipe(
         catchError(() => {
           return of(null);

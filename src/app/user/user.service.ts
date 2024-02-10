@@ -17,14 +17,14 @@ export class UserService {
   ) { }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${environment.apiUrl}/api/users`)
+    return this.http.get<User[]>(`${environment.host}/api/users`)
       .pipe( catchError(() => {
         return [];
       }));
   }
 
   getUserById(id: number): Observable<User | null> {
-    return this.http.get<User>(`${environment.apiUrl}/api/users/${id}`)
+    return this.http.get<User>(`${environment.host}/api/users/${id}`)
       .pipe( catchError(() => {
         return of(null);
       }));
@@ -41,7 +41,7 @@ export class UserService {
 
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
-    return this.http.put<User>(`${environment.apiUrl}/api/users/${id}`, formData, {headers: headers})
+    return this.http.put<User>(`${environment.host}/api/users/${id}`, formData, {headers: headers})
       .pipe(
         catchError(() => {
           return of(null);
