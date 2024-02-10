@@ -1,7 +1,7 @@
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { HomePage } from './home.page';
 import { MediaModule } from '../media/media.module';
@@ -15,7 +15,7 @@ import { RouterLink } from '@angular/router';
     RouterLink,
     IonicModule,
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     MediaModule
   ],
   declarations: [HomePage, ScanPage, SearchPage, MarkPage]

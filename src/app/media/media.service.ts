@@ -48,6 +48,28 @@ export class MediaService {
       }));
   }
 
+  createMedia(name: string, description: string, file: Blob): Observable<Media | null> {
+    let token = localStorage.getItem(AuthenticationService.storageKey);
+    if ( ! token ) return of(null);
+
+    console.log(name);
+    console.log(description);
+    console.log(file);
+
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('description', description);
+    formData.append('file', file);
+
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}`, 'enctype': 'multipart/form-data' });
+
+    return this.http.put<Media>(`${this.config.host}/api/media`, formData, {headers: headers})
+      .pipe( catchError(e => {
+        console.log(e);
+        return of(null);
+      }));
+  }
+
   updateMediaById(id: number, media: Media): Observable<Media | null> {
     let token = localStorage.getItem(AuthenticationService.storageKey);
     if ( ! token ) return of(null);
