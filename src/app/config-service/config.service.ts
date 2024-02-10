@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class ConfigService {
 
   public get host() {
-    return 'http://localhost:5001/api';
+    return 'http://localhost:5001';
   }
 
   constructor() {

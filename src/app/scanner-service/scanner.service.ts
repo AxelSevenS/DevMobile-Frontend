@@ -6,7 +6,7 @@ export declare type CameraPermission = CameraPermissionState | 'unsupported';
 @Injectable({
 	providedIn: 'root'
 })
-export class VisualReadService {
+export class ScannerService {
 
 	isActive: boolean = false;
 	support: CameraPermission = 'unsupported';

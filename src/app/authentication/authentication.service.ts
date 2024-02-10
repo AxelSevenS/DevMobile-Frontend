@@ -13,9 +13,9 @@ export declare type LoginState = 'loggedIn' | 'loggedOut' | 'disconnected';
 })
 export class AuthenticationService {
 
-  private static readonly storageKey: string = "JWT";
+  public static readonly storageKey: string = "JWT";
 
-  private _state: LoginState = 'loggedOut';
+  private _state: LoginState;
   public get state() : LoginState {
     return this._state;
   }
@@ -36,31 +36,29 @@ export class AuthenticationService {
     if (jwt === null) return;
     
     let user = this.jwtToUser(jwt);
-    if (user === null) return;
+    if (user === null) {
+      localStorage.removeItem(AuthenticationService.storageKey);
+      return;
+    }
 
     this._user = user;
     this._state = 'loggedIn';
   }
 
-  login(username: string, password: string): Observable<User | null> {
+  login(username: string, password: string) {
     const formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
 
     const headers = new HttpHeaders({ 'enctype': 'multipart/form-data' });
 
-    let res = this.http.post<string | HttpErrorResponse>(`${this.config.host}/users/auth/`, formData, {headers: headers})
+    return this.http.post<string>(`${this.config.host}/api/users/auth/`, formData, {headers: headers})
       .pipe( 
         map(res => {
-          if (res instanceof HttpErrorResponse) {
-            return null;
-          }
-
           this._user = this.jwtToUser(res);
-          if (this._user !== null) {
-            localStorage.setItem(AuthenticationService.storageKey, res)
-          }
-
+          if (this._user === null) throw new HttpErrorResponse({ error: 400 });
+          
+          localStorage.setItem(AuthenticationService.storageKey, res);
           this._state = 'loggedIn';
           return this._user;
         }), 
@@ -72,8 +70,19 @@ export class AuthenticationService {
           return of(this._user);
         })
       );
+  }
 
-    return res;
+  register(username: string, password: string) {
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+
+    const headers = new HttpHeaders({ 'enctype': 'multipart/form-data' });
+
+    return this.http.put<User>(`${this.config.host}/api/users/`, formData, {headers: headers})
+      .pipe(
+        catchError(err => of(null) )
+      );
   }
 
   logout(): void {
@@ -85,20 +94,26 @@ export class AuthenticationService {
 
   private jwtToUser(token: string): User | null {
     let decoded = jwtDecode<UserPayload>(token);
-    if ( ! decoded.sub || ! decoded.name || ! decoded.roles || ! decoded.exp || decoded.exp >= Date.now())
+    if ( 
+      ! decoded.sub ||
+      ! decoded.name ||
+      ! decoded.roles ||
+      ! decoded.exp ||
+      decoded.exp <= Math.floor(Date.now() / 1000)
+    )
       return null;
-
+    
     return {
       id: parseInt(decoded.sub),
       username: decoded.name,
-      role: decoded.roles,
+      roles: decoded.roles,
     }
   }
 }
 
 
 interface UserPayload extends JwtPayload {
-  sub: string,
-  name: string,
-  roles: "Admin" | "Client"
+  sub?: string,
+  name?: string,
+  roles?: "Admin" | "Client"
 }

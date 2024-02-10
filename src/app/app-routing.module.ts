@@ -1,37 +1,40 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { LoginPage } from './authentication/login-page/login-page';
-import { RegisterPage } from './authentication/register-page/register-page';
+import { AppModule } from './app.module';
+import { AppComponent } from './app.page';
+import { NotFoundPage } from './not-found/not-found.page';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
+    loadChildren: () => import('./home/home-routing.module').then(m => m.HomeRoutingModule),
   },
   {
     path: 'users',
-    loadChildren: () => import('./user/user.module').then(m => m.UserModule),
+    loadChildren: () => import('./user/user-routing.module').then(m => m.UserRoutingModule),
   },
   {
     path: 'media',
-    loadChildren: () => import('./media/media.module').then(m => m.MediaModule),
+    loadChildren: () => import('./media/media-routing.module').then(m => m.MediaRoutingModule),
   },
   {
-    path: 'login',
-    component: LoginPage,
+    path: 'authentication',
+    loadChildren: () => import('./authentication/authentication-routing.module').then(m => m.AuthenticationRoutingModule),
   },
   {
-    path: 'register',
-    component: RegisterPage,
-  },
+    path: '**',
+    component: NotFoundPage,
+  }
 ];
 @NgModule({
   imports: [
+    AppModule,
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule],
   providers: [
     // ActivatedRoute
-  ]
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppRoutingModule {}

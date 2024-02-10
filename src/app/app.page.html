@@ -2,12 +2,13 @@
 	<ion-header [translucent]="true">
 		<ion-toolbar>
 			<ion-buttons slot="start">
-			  <ion-button [routerLink]="['']" fill="clear" size="large" shape="round">Kredit</ion-button>
+				<ion-back-button></ion-back-button>
+				<ion-button [routerLink]="['']" fill="clear" size="large" shape="round">Kredit</ion-button>
 			</ion-buttons>
 		</ion-toolbar>
 	</ion-header>
 	
-	<ion-content [ngStyle]="this.visualReader.isActive && { '--background': '#00000000' } || null">
+	<ion-content>
 		
 		<ion-fab slot="fixed" vertical="top" horizontal="end" [edge]="true">
 			<ion-fab-button>
@@ -21,22 +22,42 @@
 					<ion-fab-button [routerLink]="['/users', this.authentication.user.id]">
 						<ion-icon name="settings-outline"></ion-icon>
 					</ion-fab-button>
-					<ion-fab-button>
+					<ion-fab-button [routerLink]="['/users/library', this.authentication.user.id]">
 						<ion-icon name="library-outline"></ion-icon>
 					</ion-fab-button>
-					<ion-fab-button>
+					<!-- <ion-fab-button>
 						<ion-icon name="calendar-outline"></ion-icon>
-					</ion-fab-button>
+					</ion-fab-button> -->
 					<ion-fab-button (click)="this.authentication.logout()">
 						<ion-icon name="log-out-outline"></ion-icon>
 					</ion-fab-button>
 				</ng-template>
 		
 				<ng-template #loggedOut>
-					<ion-fab-button [routerLink]="['/login']">
+					<ion-fab-button [routerLink]="['/authentication/login']">
 						<ion-icon name="log-in-outline"></ion-icon>
 					</ion-fab-button>
 				</ng-template>
+			</ion-fab-list>
+
+			<ion-fab-list *ngIf="this.authentication.user" side="start">
+				<!-- <ion-fab-button [routerLink]="['/users', this.authentication.user.id]">
+					<ion-icon name="settings-outline"></ion-icon>
+				</ion-fab-button>
+				<ion-fab-button>
+					<ion-icon name="library-outline"></ion-icon>
+				</ion-fab-button>
+				<ion-fab-button>
+					<ion-icon name="calendar-outline"></ion-icon>
+				</ion-fab-button>
+				<ion-fab-button (click)="this.authentication.logout()">
+					<ion-icon name="log-out-outline"></ion-icon>
+				</ion-fab-button> -->
+				<ion-card>
+					<ion-card-header>
+						<ion-text>Bienvenue, {{ this.authentication.user.username }}</ion-text>
+					</ion-card-header>
+				</ion-card>
 			</ion-fab-list>
 		</ion-fab>
 

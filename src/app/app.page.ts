@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { VisualReadService } from './visual-read-service/visual-read.service';
+import { ScannerService } from './scanner-service/scanner.service';
 import { AuthenticationService } from './authentication/authentication.service';
 
 @Component({
@@ -8,12 +8,12 @@ import { AuthenticationService } from './authentication/authentication.service';
   styleUrls: ['app.page.scss'],
 })
 export class AppComponent {
-  public get visualReader(): VisualReadService { return this._visualReader; }
+  public get scanner(): ScannerService { return this._scanner; }
   public get authentication(): AuthenticationService { return this._authentication; }
 
   
 	constructor(
-		private _visualReader: VisualReadService,
+		private _scanner: ScannerService,
     private _authentication: AuthenticationService
 	) {}
 }

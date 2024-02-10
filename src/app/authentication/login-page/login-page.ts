@@ -11,11 +11,7 @@ import { Router } from '@angular/router';
 export class LoginPage implements OnInit {
 
   loginForm: FormGroup = this.formBuilder.group({
-    username: ['', Validators.compose([
-      Validators.minLength(5),
-      Validators.required,
-      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
-    ])],
+    username: ['', Validators.required],
     password: ['', Validators.required]
   });
 
@@ -28,13 +24,12 @@ export class LoginPage implements OnInit {
   ngOnInit() {}
 
   login() {
-    console.log(`${this.loginForm.controls["username"].value} - ${this.loginForm.controls["password"].value}`)
     this.authenticationService.login(this.loginForm.controls["username"].value, this.loginForm.controls["password"].value)
       .subscribe(u => {
-        if (u === null) {
-          window.location.reload();
+        if (u !== null) {
+          this.router.navigate([''])
+            .then(() => window.location.reload())
         }
-        this.router.navigate(['/home'])
       })
   }
 

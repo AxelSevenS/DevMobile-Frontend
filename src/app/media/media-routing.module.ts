@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MediaListPage } from './media-list-page/media-list.page';
 import { MediaPage } from './media-page/media.page';
+import { MediaModule } from './media.module';
 
 const routes: Routes = [
   {
@@ -15,6 +16,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    MediaModule,
+    RouterModule.forChild(routes)
+  ],
 })
 export class MediaRoutingModule {}

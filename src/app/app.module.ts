@@ -5,20 +5,18 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.page';
-import { VisualReadService } from './visual-read-service/visual-read.service';
+import { ScannerService } from './scanner-service/scanner.service';
 import { ConfigService } from './config-service/config.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginPage } from './authentication/login-page/login-page';
-import { RegisterPage } from './authentication/register-page/register-page';
+import { AuthenticationService } from './authentication/authentication.service';
+import { NotFoundPage } from './not-found/not-found.page';
 
 @NgModule({
-  declarations: [AppComponent, LoginPage, RegisterPage],
+  declarations: [AppComponent, NotFoundPage],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
@@ -28,12 +26,12 @@ import { RegisterPage } from './authentication/register-page/register-page';
     Storage,
     HttpClient,
     ConfigService,
-    VisualReadService,
+    ScannerService,
+    AuthenticationService,
     { 
       provide: RouteReuseStrategy, 
       useClass: IonicRouteStrategy
     }
-    ],
-    bootstrap: [AppComponent],
+  ]
 })
 export class AppModule {}

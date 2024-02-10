@@ -32,3 +32,26 @@ app-root {
 		visibility: hidden;
 	}
 }
+
+ion-label[position="stacked"]:has(+ ion-text) {
+	flex: initial;
+	flex-grow: initial !important;
+
+	& + ion-text {
+		padding-top: 8px;
+	}
+}
+
+video, audio, img {
+	object-fit: contain;
+    width: -webkit-fill-available;
+    max-height: 60vh;
+}
+
+img {
+	-webkit-user-drag: none;
+	-khtml-user-drag: none;
+	-moz-user-drag: none;
+	-o-user-drag: none;
+	user-drag: none;
+}

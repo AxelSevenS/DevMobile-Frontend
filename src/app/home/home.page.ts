@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { AuthenticationService } from '../authentication/authentication.service';
 
 @Component({
-  selector: 'app-tabs',
-  templateUrl: 'tabs.page.html',
-  styleUrls: ['tabs.page.scss']
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss']
 })
-export class TabsPage {
+export class HomePage {
 
   public static readonly PAGES = [
     {
@@ -15,8 +15,8 @@ export class TabsPage {
       icon: 'scan-outline'
     },
     {
-      path: 'find',
-      display: 'Find',
+      path: 'search',
+      display: 'Search',
       icon: 'search-circle-outline'
     },
     {
@@ -26,7 +26,7 @@ export class TabsPage {
     }
   ];
 
-  public get pages() { return TabsPage.PAGES; }
+  public get pages() { return HomePage.PAGES; }
   public get authentication(): AuthenticationService { return this._authentication; }
 
 
