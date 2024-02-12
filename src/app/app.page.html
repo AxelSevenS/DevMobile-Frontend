@@ -8,7 +8,7 @@
 		</ion-toolbar>
 	</ion-header>
 	
-	<ion-content>
+	<ion-content [ngStyle]="this.scanner.isActive && { '--background': '#00000000' } || null">
 		
 		<ion-fab slot="fixed" vertical="top" horizontal="end" [edge]="true">
 			<ion-fab-button>
