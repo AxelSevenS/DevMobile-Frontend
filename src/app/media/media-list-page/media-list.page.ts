@@ -9,8 +9,8 @@ import { MediaService } from '../media.service';
 })
 export class MediaListPage implements OnInit {
 
-  public get medias(): Media[] { return this._medias }
-  private _medias: Media[] = []
+  public get medias() { return this._medias }
+  private _medias?: Media[] | null;
 
   constructor(
     private mediaService: MediaService

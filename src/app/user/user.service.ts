@@ -16,10 +16,10 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  getUsers(): Observable<User[]> {
+  getUsers(): Observable<User[] | null> {
     return this.http.get<User[]>(`${environment.host}/api/users`)
       .pipe( catchError(() => {
-        return [];
+        return of(null);
       }));
   }
 
@@ -30,18 +30,18 @@ export class UserService {
       }));
   }
 
-  updateUserById(id: number, user: User): Observable<User | null> {
+  updateUserById(id: number, user: Partial<User>): Observable<User | null> {
     let token = localStorage.getItem(AuthenticationService.storageKey);
     if ( ! token ) return of(null);
 
     const formData = new FormData();
-    formData.append('username', user.username);
-    formData.append('roles', user.roles);
-    if (user?.password) formData.append('password', user.password);
+    if (user.username) formData.append('username', user.username);
+    if (user.password) formData.append('password', user.password);
+    if (user.roles) formData.append('roles', user.roles);
 
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
-    return this.http.put<User>(`${environment.host}/api/users/${id}`, formData, {headers: headers})
+    return this.http.patch<User>(`${environment.host}/api/users/${id}`, formData, {headers: headers})
       .pipe(
         catchError(() => {
           return of(null);

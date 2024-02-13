@@ -8,7 +8,7 @@ import { UserModule } from 'src/app/user/user.module';
 
 const routes: Routes = [
   {
-    path: 'search',
+    path: '',
     component: SearchPage,
     children: [
       {

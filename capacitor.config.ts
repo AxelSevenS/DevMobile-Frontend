@@ -2,10 +2,10 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
-  appName: 'DHF',
+  appName: 'Kredit',
   webDir: 'www',
   server: {
-    androidScheme: 'https'
+    androidScheme: 'http',
   }
 };
 

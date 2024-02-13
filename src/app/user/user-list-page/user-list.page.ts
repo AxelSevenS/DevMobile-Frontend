@@ -9,8 +9,8 @@ import { UserService } from '../user.service';
 })
 export class UserListPage implements OnInit {
 
-  public get users(): User[] { return this._users }
-  private _users: User[] = []
+  public get users() { return this._users }
+  private _users?: User[] | null;
 
   constructor(
     private userService: UserService

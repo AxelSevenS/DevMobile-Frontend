@@ -17,7 +17,7 @@ export class MediaPage {
   editMediaForm: FormGroup = this.formBuilder.group(
     {
       name: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['']
     }
   );
 
@@ -73,11 +73,13 @@ export class MediaPage {
     if ( ! this.media ) return;
     if ( ! this.editMediaForm.valid ) return;
 
-    let updated: Media = this.media;
-    this.media.name = this.editMediaForm.controls['name'].value;
-    this.media.description = this.editMediaForm.controls['description'].value;
-
-    this.mediaService.updateMediaById(this.media.id, updated);
+    this.mediaService.updateMediaById(this.media.id, {
+      name: this.editMediaForm.controls['name'].value,
+      description: this.editMediaForm.controls['description'].value,
+    })
+      .subscribe(res => {
+        console.log(res)
+      });
   }
 
   async delete() {

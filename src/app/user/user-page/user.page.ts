@@ -59,13 +59,11 @@ export class UserPage {
     if ( ! this.user ) return;
     if ( ! this.editUserForm.valid ) return;
 
-    let updated: User = this.user;
-
-    this.user.username = this.editUserForm.controls['username'].value;
-    this.user.password = this.editUserForm.controls['password'].value;
-    this.user.roles = this.editUserForm.controls['roles'].value;
-
-    this.userService.updateUserById(this.requestId, updated)
+    this.userService.updateUserById(this.requestId, {
+      username: this.editUserForm.controls['username'].value,
+      password: this.editUserForm.controls['password'].value,
+      roles: this.editUserForm.controls['roles'].value,
+    })
       .subscribe(res => {
         if (res && this.requestId == this.authentication.user?.id) {
           this.authentication.logout();

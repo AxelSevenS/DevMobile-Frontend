@@ -1,5 +1,5 @@
 
 export const environment = {
   production: true,
-  host: process.env['API_URL'] || 'http://localhost:5001'
+  host: 'http://10.13.35.135:5001'
 };

@@ -26,10 +26,10 @@ export class MediaService {
     return `${environment.host}/Resources/Media/${media.id}.${media.extension}`;
   }
 
-  getMedias(): Observable<Media[]> {
+  getMedias(): Observable<Media[] | null> {
     return this.http.get<Media[]>(`${environment.host}/api/media`)
-      .pipe( catchError(err => {
-        return [];
+      .pipe( catchError(() => {
+        return of(null);
       }));
   }
 
@@ -64,17 +64,20 @@ export class MediaService {
       }));
   }
 
-  updateMediaById(id: number, media: Media): Observable<Media | null> {
+  updateMediaById(id: number, media: Partial<Media>): Observable<Media | null> {
     let token = localStorage.getItem(AuthenticationService.storageKey);
     if ( ! token ) return of(null);
 
     const formData = new FormData();
-    formData.append('name', media.name);
-    formData.append('description', media.description);
+    if (media.authorId != undefined) formData.append('authorId', media.authorId.toString());
+    if (media.name != undefined) formData.append('name', media.name);
+    if (media.description != undefined) formData.append('description', media.description);
+    
+    console.log(formData);
 
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
-    return this.http.put<Media>(`${environment.host}/api/media/${id}`, formData, {headers: headers})
+    return this.http.patch<Media>(`${environment.host}/api/media/${id}`, formData, {headers: headers})
       .pipe(
         catchError(() => {
           return of(null);
